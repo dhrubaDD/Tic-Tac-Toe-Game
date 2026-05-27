@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="dhruba.png">
+</head>
+<body class="dark">
+ <div class="main-game">
+        <div class="outline">
+        <div class="top-bar">
+            <div class="logo"></div>
+            <div class="heading"><a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_main"><h3> TIC TAC TOE </h3></a></div> 
+
+            <div class="theme">
+                <button>Light Mode</button>
+            </div>
+            <div class="game" id="newgame">
+                <button>New Game</button>
+            </div>
+            <div class="game" id="resetgame">
+                <button>Reset Game</button>
+            </div>
+
+            <div class="other"><a>Other Games</a></div>
+            <div class="logo-icon" ><a href="https://linkedin.com/in/dhruba-datta-2a7aa9327" target="_main"><i style="color:#0077B5"style="color:#0077B5"class="fa-brands fa-square-linkedin"></i></a></div>
+            <div class="logo-icon play-pause" ><i class="fa-solid fa-play"></i></div>
+        </div>
+
+        <div class="player">
+            <div class="play p1">
+                <p>Player1</p>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="play p2">
+                <i class="fa-regular fa-circle"></i>
+                <p>Player2</p>
+            </div>
+        </div>
+
+        <div class="score">
+            <p id="p1-score" class="scr">0</p>
+            <p id="p2-score" class="scr">0</p>
+        </div>
+
+        <!-- GAME -->
+        <div class="game-box">
+            <div id="box1" class="box"></div>
+            <div id="box2" class="box"></div>
+            <div id="box3" class="box"></div>
+            <div id="box4" class="box"></div>
+            <div id="box5" class="box"></div>
+            <div id="box6" class="box"></div>
+            <div id="box7" class="box"></div>
+            <div id="box8" class="box"></div>
+            <div id="box9" class="box"></div>
+        </div>
+    </div>
+ </div>
+    <div class="pop-up hide">ABCD
+        <button>OK</button>
+    </div>
+    <!-- Audio tags -->
+    <audio id="pop1">
+        <source src="pop1.mp3" type="audio/mp3">
+    </audio>
+    <audio id="pop2">
+        <source src="pop2.mp3" type="audio/mp3">
+    </audio>
+    <audio id="bgm" loop>
+        <source src="music1.mp3" type="audio/mp3">
+    </audio>
+        <audio id="winSong" >
+        <source src="winner.mp3" type="audio/mp3">
+    </audio>
+    <audio id="gStart" >
+        <source src="game start.mp3" type="audio/mp3">
+    </audio>
+    <audio id="round" >
+        <source src="round winner.mp3" type="audio/mp3">
+    </audio>
+    <audio id="drawSound" >
+        <source src="draw.mp3" type="audio/mp3">
+    </audio>
+    
+    <script src="script.js"></script>
+    <!-- CONFETTI -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+    function boom(){
+        confetti({
+            particleCount: 100,
+            spread: 120
+        });
+    }
+    </script>
+</body>
+</html>
