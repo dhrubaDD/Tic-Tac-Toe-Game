@@ -191,9 +191,11 @@ a:active{
 }
 @keyframes animationbox{
     from{
+        border-radius:30%;
         background-color: #a9d6e5;
     }
     to{
+        border-radius:50%;
         background-color: #ffd60a;
     }
 }
