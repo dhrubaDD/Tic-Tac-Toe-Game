@@ -1,0 +1,635 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ---------- Theme Backgrounds ---------- */
+.dark {
+    min-height: 100vh;
+    background-image: linear-gradient(45deg, #000814, #001d3d);
+    background-attachment: fixed;
+}
+
+.light {
+    min-height: 100vh;
+    background-image: linear-gradient(45deg, #a9d6e5, #01497c);
+    background-attachment: fixed;
+}
+
+/* ---------- Links ---------- */
+a {
+    text-decoration: none;
+    color: #ffd400;
+}
+
+a:hover {
+    color: beige;
+}
+
+a:active {
+    color: limegreen;
+}
+
+/* ---------- Main Container ---------- */
+.main-game {
+    width: 100%;
+    min-height: 100vh;
+    padding: clamp(10px, 2vw, 24px);
+}
+
+.outline {
+    width: 100%;
+    max-width: 1400px;
+    min-height: calc(100vh - clamp(20px, 4vw, 48px));
+    margin: 0 auto;
+    padding: clamp(10px, 1.5vw, 20px);
+    border: 3px solid #003566;
+    border-radius: 20px;
+}
+
+/* ---------- Top Navigation / Header ---------- */
+.top-bar {
+    width: 100%;
+    min-height: 70px;
+    padding: 10px 12px;
+    border-bottom: 2px solid black;
+    box-shadow: 2px 2px 10px #ffd60a;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+}
+
+.logo {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 30px;
+    margin: 0;
+    background-image: url(tic-tac-toe.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #ffd60a;
+    border-radius: 10%;
+    animation: logoAnm 100s ease-in-out infinite;
+}
+
+@keyframes logoAnm {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.logo-icon {
+    flex: 0 0 auto;
+    margin-right: 0;
+    font-size: 1.5rem;
+    color: #ffd500;
+}
+
+.logo-icon:hover {
+    color: #a9d6e5;
+}
+
+.heading {
+    flex: 1 1 180px;
+    min-width: 0;
+    height: auto;
+    color: #ffd60a;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    white-space: nowrap;
+}
+
+.heading a {
+    display: inline-block;
+}
+
+.heading h3 {
+    font-size: inherit;
+}
+
+.heading:hover {
+    color: limegreen;
+}
+
+/* ---------- Header Controls ---------- */
+.theme,
+.game,
+.other {
+    flex: 0 0 auto;
+}
+
+.theme button,
+.game button {
+    height: 36px;
+    min-width: 110px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    background-color: #ffd500;
+    white-space: nowrap;
+}
+
+.theme button {
+    border-radius: 15px;
+}
+
+.game {
+    width: auto;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game button {
+    width: 100%;
+}
+
+button:hover {
+    background-color: beige;
+    border: 2px solid red;
+}
+
+button:active {
+    background-color: limegreen;
+}
+
+.other {
+    margin-right: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* ---------- Player Description ---------- */
+.player {
+    width: min(95%, 950px);
+    min-height: 60px;
+    margin: clamp(35px, 6vw, 60px) auto 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.play {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 6px 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(6px, 1vw, 12px);
+
+    border-radius: 4px;
+    font-size: clamp(1.1rem, 2.4vw, 2rem);
+    text-shadow: 2px 5px 20px #8da9c4;
+}
+
+.p1 {
+    color: #e63946;
+}
+
+.p2 {
+    color: #a7c957;
+}
+
+.play i {
+    font-size: clamp(1.6rem, 3.5vw, 3rem);
+}
+
+.play:hover {
+    font-size: clamp(1.2rem, 2.6vw, 2.2rem);
+}
+
+/* ---------- Score ---------- */
+.score {
+    width: min(80%, 650px);
+    min-height: 60px;
+    margin: 10px auto 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: #ffd400;
+}
+
+.scr {
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1;
+}
+
+/* ---------- Game Board ---------- */
+.game-box {
+    width: min(80vw, 600px);
+    aspect-ratio: 1 / 1;
+    margin: clamp(25px, 4vw, 40px) auto;
+    padding: clamp(8px, 1.5vw, 16px);
+
+    background-image: linear-gradient(135deg, #001d3d, #557c93);
+    border-radius: 10%;
+    box-shadow: 50px 25px 100px rgba(0, 0, 1, 0.4);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: clamp(8px, 1.5vw, 16px);
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    border-radius: 30%;
+    background-color: #a9d6e5;
+    box-shadow: 5px 5px rgba(0, 0, 1, 0.3);
+    opacity: 40%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(2rem, 10vw, 7rem);
+    line-height: 1;
+    user-select: none;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+@keyframes animationbox {
+    from {
+        border-radius: 30%;
+        background-color: #a9d6e5;
+    }
+
+    to {
+        border-radius: 50%;
+        background-color: #ffd60a;
+    }
+}
+
+@keyframes animationDraw {
+    from {
+        border-radius: 30%;
+        background-color: #a9d6e5;
+    }
+
+    to {
+        border-radius: 20%;
+        background-color: #ffd500;
+    }
+}
+
+.box-draw {
+    animation: animationDraw 0.60s ease-in-out infinite alternate-reverse;
+}
+
+.box-win {
+    animation: animationbox 2s ease;
+    background-color: #ffd500;
+}
+
+.box:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+/* ---------- Result Popup ---------- */
+.pop-up {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: min(90vw, 1000px);
+    min-height: 150px;
+    padding: 24px;
+
+    background-color: #ffd500;
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    text-align: center;
+
+    animation: animation1 0.5s ease;
+}
+
+.hide {
+    display: none;
+}
+
+@keyframes animation1 {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: min(90vw, 1000px);
+        opacity: 1;
+    }
+}
+
+/* ---------- Highlight Animation ---------- */
+@keyframes hLight {
+    0% {
+        font-size: 2rem;
+    }
+
+    50% {
+        font-size: 3rem;
+    }
+
+    100% {
+        font-size: 2rem;
+    }
+}
+
+.high {
+    animation: hLight 4s infinite;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+
+/* ---------- Tablets / Small Laptops ---------- */
+@media (max-width: 900px) {
+    .outline {
+        padding: 10px;
+    }
+
+    .top-bar {
+        justify-content: center;
+    }
+
+    .heading {
+        flex: 1 1 160px;
+        text-align: center;
+    }
+
+    .player {
+        width: 92%;
+    }
+
+    .score {
+        width: 75%;
+    }
+
+    .game-box {
+        width: min(82vw, 520px);
+        box-shadow: 25px 15px 60px rgba(0, 0, 1, 0.35);
+    }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+    .main-game {
+        padding: 8px;
+    }
+
+    .outline {
+        width: 100%;
+        min-height: calc(100vh - 16px);
+        padding: 8px;
+        border-width: 2px;
+        border-radius: 14px;
+    }
+
+    .top-bar {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .logo {
+        width: 28px;
+        height: 28px;
+    }
+
+    .heading {
+        flex: 1 1 calc(100% - 45px);
+        order: 1;
+        text-align: left;
+    }
+
+    .logo {
+        order: 0;
+    }
+
+    .theme,
+    .game,
+    .other {
+        order: 2;
+    }
+
+    .theme button,
+    .game button {
+        min-width: 0;
+        width: auto;
+        height: 34px;
+        padding: 0 10px;
+        font-size: 0.78rem;
+    }
+
+    .other {
+        display: none;
+    }
+
+    .logo-icon {
+        order: 3;
+        font-size: 1.25rem;
+    }
+
+    .player {
+        width: 94%;
+        margin-top: 30px;
+        gap: 8px;
+    }
+
+    .play {
+        padding: 4px;
+        gap: 5px;
+        font-size: 1rem;
+    }
+
+    .play:hover {
+        font-size: 1.05rem;
+    }
+
+    .play i {
+        font-size: 1.5rem;
+    }
+
+    .score {
+        width: 78%;
+        margin-top: 12px;
+        font-size: clamp(2rem, 12vw, 4rem);
+    }
+
+    .game-box {
+        width: min(88vw, 430px);
+        margin-top: 28px;
+        padding: 8px;
+        gap: 8px;
+        border-radius: 8%;
+        box-shadow: 15px 10px 40px rgba(0, 0, 1, 0.3);
+    }
+
+    .box {
+        font-size: clamp(2rem, 16vw, 5rem);
+        border-radius: 25%;
+    }
+
+    .pop-up {
+        width: 88vw;
+        min-height: 130px;
+        padding: 18px;
+        border-radius: 22px;
+        font-size: clamp(1.25rem, 6vw, 2rem);
+    }
+
+    @keyframes animation1 {
+        from {
+            width: 0;
+            opacity: 0;
+        }
+
+        to {
+            width: 88vw;
+            opacity: 1;
+        }
+    }
+}
+
+/* ---------- Very Small Phones ---------- */
+@media (max-width: 400px) {
+    .top-bar {
+        justify-content: center;
+    }
+
+    .heading {
+        flex: 1 1 100%;
+        text-align: center;
+        order: 0;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .theme,
+    .game {
+        order: 1;
+    }
+
+    .logo-icon {
+        order: 1;
+    }
+
+    .player {
+        margin-top: 24px;
+    }
+
+    .play {
+        font-size: 0.9rem;
+    }
+
+    .play:hover {
+        font-size: 0.95rem;
+    }
+
+    .play i {
+        font-size: 1.3rem;
+    }
+
+    .score {
+        width: 82%;
+        font-size: clamp(1.8rem, 12vw, 3rem);
+    }
+
+    .game-box {
+        width: 90vw;
+        gap: 6px;
+        padding: 6px;
+    }
+
+    .box {
+        border-radius: 20%;
+        font-size: 14vw;
+    }
+
+    .pop-up {
+        width: 90vw;
+        min-height: 110px;
+        padding: 14px;
+    }
+
+    @keyframes animation1 {
+        from {
+            width: 0;
+            opacity: 0;
+        }
+
+        to {
+            width: 90vw;
+            opacity: 1;
+        }
+    }
+}
+
+/* ---------- Accessibility / Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
